@@ -7,6 +7,9 @@
  *
  * This document is licensed as free software under the terms of the
  * MIT License: http://www.opensource.org/licenses/mit-license.php
+ *
+ * Modified by QuantsResearch
+ * https://github.com/QuantsResearch/jquery-jsonp/issues/1
  */
 ( function( $ ) {
 
@@ -14,11 +17,6 @@
 
 	// Noop
 	function noop() {
-	}
-
-	// Generic callback
-	function genericCallback( data ) {
-		lastValue = [ data ];
 	}
 
 	// Call if defined
@@ -89,6 +87,12 @@
 
 	// ###################### MAIN FUNCTION ##
 	function jsonp( xOptions ) {
+
+		// Generic callback
+		function genericCallback( callbackData ) {
+			lastValue = [ callbackData ];
+			delete win[ successCallbackName ];
+		}
 
 		// Build data with default
 		xOptions = $.extend( {} , xOptionsDefaults , xOptions );
